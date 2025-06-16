@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += ['corsheaders']
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Debe ir antes de CommonMiddleware
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,8 +66,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
 
 ROOT_URLCONF = 'back2fa.urls'
 
@@ -154,10 +153,13 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://localhost:4000",
     "http://127.0.0.1:4200",
+    "https://ispcfood.netlify.app",
+    "https://*.netlify.app",  # Para permitir cualquier subdominio de netlify
 ]
 
-# En producción deshabilitar CORS_ALLOW_ALL_ORIGINS
-CORS_ALLOW_ALL_ORIGINS = DEBUG
+# En desarrollo podemos permitir todos los orígenes
+# En producción definimos específicamente los orígenes permitidos
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
     'DELETE',
