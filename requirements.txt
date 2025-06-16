@@ -4,3 +4,4 @@ pyotp
 qrcode[pil]
 gunicorn
 mysqlclient
+django-cors-headers
