@@ -3,3 +3,4 @@ djangorestframework
 pyotp
 qrcode[pil]
 gunicorn
+mysqlclient
