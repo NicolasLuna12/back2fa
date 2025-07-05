@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db import connection
 from .models import User2FA
 from .serializers import Setup2FASerializer, Verify2FASerializer, AuthorizePurchaseSerializer
 import pyotp
@@ -9,8 +10,36 @@ import qrcode
 import base64
 from io import BytesIO
 import logging
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
+
+# Endpoint para hacer ping a la base de datos
+class DatabasePingView(APIView):
+    def get(self, request):
+        try:
+            # Realizar una consulta simple para mantener activa la conexión
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT 1")
+                cursor.fetchone()
+            
+            # También podemos hacer una consulta a nuestra tabla
+            user_count = User2FA.objects.count()
+            
+            return Response({
+                "status": "ok",
+                "message": "Database connection is alive",
+                "timestamp": datetime.now().isoformat(),
+                "user_count": user_count
+            })
+        except Exception as e:
+            logger.error(f"Error en ping de base de datos: {str(e)}")
+            return Response({
+                "status": "error",
+                "message": "Database connection failed",
+                "error": str(e),
+                "timestamp": datetime.now().isoformat()
+            }, status=500)
 
 # Añadimos una clase para comprobar el estado del servicio
 class HealthCheckView(APIView):

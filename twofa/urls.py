@@ -6,4 +6,5 @@ urlpatterns = [
     path('verify/', views.Verify2FAView.as_view(), name='verify-2fa'),
     path('authorize/', views.AuthorizePurchaseView.as_view(), name='authorize-purchase'),
     path('health/', views.HealthCheckView.as_view(), name='health'),
+    path('ping/', views.DatabasePingView.as_view(), name='database-ping'),
 ]
