@@ -1,0 +1,24 @@
+databases:
+  - name: back2fa-db
+    databaseName: back2fa
+    user: back2fa_user
+
+services:
+  - type: web
+    name: back2fa
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn back2fa.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: back2fa-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: False
+      - key: DJANGO_SECURE_SSL_REDIRECT
+        value: True
+      - key: WEB_CONCURRENCY
+        value: 4
