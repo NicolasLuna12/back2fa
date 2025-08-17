@@ -55,7 +55,12 @@ class HealthCheckView(APIView):
             "received_data": request.data
         })
 
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+@method_decorator(csrf_exempt, name='dispatch')
 class Setup2FAView(APIView):
+    permission_classes = [AllowAny]
     def post(self, request):
         email = request.data.get('email')
         if not email:
