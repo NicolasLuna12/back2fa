@@ -78,7 +78,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Debe ir antes de CommonMiddleware
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Para servir archivos estáticos
-    'twofa.middleware.SecurityOriginMiddleware',  # Middleware personalizado de seguridad
+    # 'twofa.middleware.SecurityOriginMiddleware',  # Middleware personalizado de seguridad
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
