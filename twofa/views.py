@@ -1,3 +1,4 @@
+from rest_framework.permissions import AllowAny
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -93,6 +94,7 @@ class Verify2FAView(APIView):
         return Response({'verified': False}, status=400)
 
 class AuthorizePurchaseView(APIView):
+    permission_classes = [AllowAny]
     def post(self, request):
         logger.info(f"POST /api/2fa/authorize/ - data: {request.data}")
         try:
