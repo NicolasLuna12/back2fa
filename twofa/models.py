@@ -9,11 +9,6 @@ class User2FA(models.Model):
         return self.email
 
 # Modelo de prueba para verificar migraciones y creación de tabla
-class Nicolas(models.Model):
-    nombre = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nombre
 from django.db import models
 
 class User2FA(models.Model):

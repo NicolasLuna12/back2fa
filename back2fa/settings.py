@@ -52,7 +52,6 @@ DATABASES = {
     }
 }
 
-print('DB CONFIG:', DATABASES)
 SESSION_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_SAMESITE = 'Strict'
 
