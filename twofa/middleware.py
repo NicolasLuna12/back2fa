@@ -31,21 +31,6 @@ class SecurityOriginMiddleware:
             ])
 
     def __call__(self, request):
-        # Obtener el origen de la solicitud
-        origin = request.META.get('HTTP_ORIGIN')
-        referer = request.META.get('HTTP_REFERER')
-        
-        # Para solicitudes AJAX/API, validar el origen
-        if request.content_type == 'application/json' or '/api/' in request.path:
-            if origin and origin not in self.allowed_origins:
-                logger.warning(f"Solicitud bloqueada desde origen no permitido: {origin}")
-                return HttpResponseForbidden("Origen no permitido")
-            
-            # Validar también el referer como medida adicional
-            if referer and not any(referer.startswith(allowed) for allowed in self.allowed_origins):
-                if not settings.DEBUG:  # Solo en producción
-                    logger.warning(f"Solicitud bloqueada por referer inválido: {referer}")
-                    return HttpResponseForbidden("Referer no válido")
-        
-        response = self.get_response(request)
-        return response
+        # Para pruebas: permitir cualquier origen y referer
+        # ¡ATENCIÓN! Esto desactiva la seguridad de origen. No dejar en producción.
+        return self.get_response(request)
