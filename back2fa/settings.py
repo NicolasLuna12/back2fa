@@ -85,7 +85,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+        # 'django.middleware.csrf.CsrfViewMiddleware',  # CSRF deshabilitado para toda la app
+    ]
 
 ROOT_URLCONF = 'back2fa.urls'
 
