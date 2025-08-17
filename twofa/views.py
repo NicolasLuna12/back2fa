@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 from rest_framework.response import Response
 from rest_framework import status
 from django.db import connection
@@ -94,7 +92,6 @@ class Verify2FAView(APIView):
             return Response({'verified': True})
         return Response({'verified': False}, status=400)
 
-@method_decorator(csrf_exempt, name='dispatch')
 class AuthorizePurchaseView(APIView):
     def post(self, request):
         logger.info(f"POST /api/2fa/authorize/ - data: {request.data}")
