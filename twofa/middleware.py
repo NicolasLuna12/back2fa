@@ -15,7 +15,10 @@ class SecurityOriginMiddleware:
     
     def __init__(self, get_response):
         self.get_response = get_response
-        self.allowed_origins = ['https://ispcfood.netlify.app']
+        self.allowed_origins = [
+            'https://ispcfood.netlify.app',
+            'https://www.ispcfood.netfily.app'
+        ]
         
         # En modo DEBUG, permitir también localhost
         if settings.DEBUG:
